@@ -21,8 +21,15 @@ pipeline {
       }
       stage('sonarqube-sa') {
             steps {
-                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric1 -Dsonar.host.url=http://devtyss.eastus.cloudapp.azure.com:9000 -Dsonar.login=sqp_1e8c8b7ae4c8d8b76b668653e3127c7ec98a5606"
-              }
+                withSonarQubeEnv('SonarQube') {
+                  sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric1 -Dsonar.host.url=http://devtyss.eastus.cloudapp.azure.com:9000 -Dsonar.login=sqp_1e8c8b7ae4c8d8b76b668653e3127c7ec98a5606"
+                }
+                timeout(time: 2, unit: 'MINUTES') {
+                  script {
+                    waitForQualityGate abortPipeline: true
+                  }
+                }
+            }
             
       }
       stage('Docker Build and push') {
