@@ -35,7 +35,7 @@ pipeline {
       stage('Vulnerability Scan - Docker'){
         steps {
            parallel{
-            "dependency scan": {
+            "dependency scan":{
                sh "mvn dependency-check:check"
             },
             "Trivy Scan":{
