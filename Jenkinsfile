@@ -45,7 +45,7 @@ pipeline {
           )
         }
       }  */
-     /*  stage('Docker Build and push') {
+       stage('Docker Build and push') {
         steps {
           withDockerRegistry([credentialsId:"dockerhub", url: ""]){
             sh 'printenv'
@@ -54,7 +54,7 @@ pipeline {
             //sh 'sudo docker push adinagesh/numeric-app:""$GIT_COMMIT""'
           }
         }
-      } */
+      } 
      /*  stage('kubernetes Deployment - Dev'){
         steps {
            withKubeConfig([credentialsId: 'kubeconfig']){
