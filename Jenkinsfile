@@ -19,7 +19,7 @@ pipeline {
               }
             }
       }
-      stage('sonarqube-sa') {
+     /*  stage('sonarqube-sa') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                   sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric1 -Dsonar.host.url=http://devtyss.eastus.cloudapp.azure.com:9000"
@@ -29,10 +29,10 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                   }
                 }
-            }
+            }  
             
-      }
-      stage('Vulnerability Scan - Docker'){
+      } */
+    /*   stage('Vulnerability Scan - Docker'){
         steps {
            parallel(
             "dependency scan":{
@@ -44,8 +44,8 @@ pipeline {
             }
           )
         }
-      }
-      stage('Docker Build and push') {
+      }  */
+     /*  stage('Docker Build and push') {
         steps {
           withDockerRegistry([credentialsId:"dockerhub", url: ""]){
             sh 'printenv'
@@ -54,8 +54,8 @@ pipeline {
             //sh 'sudo docker push adinagesh/numeric-app:""$GIT_COMMIT""'
           }
         }
-      }
-      stage('kubernetes Deployment - Dev'){
+      } */
+     /*  stage('kubernetes Deployment - Dev'){
         steps {
            withKubeConfig([credentialsId: 'kubeconfig']){
             sh "sed -i 's#replace#adinagesh/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
@@ -64,5 +64,5 @@ pipeline {
         }
 
       }
-    }
+    } */
 }
