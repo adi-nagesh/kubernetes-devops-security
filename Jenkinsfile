@@ -75,7 +75,7 @@ pipeline {
          // echo 'I will always say Hello again!'
          //  junit 'target/surefire-reports/*.xml'
         //  jacoco execPattern: 'target/jacoco.exec'
-            sendnotification currentBuild.result
+      sendnotification currentBuild.result
         }
   }
   //success {}
