@@ -47,7 +47,7 @@ pipeline {
       }  */
        stage('Docker Build and push') {
         steps {
-          withDockerRegistry([credentialsId:"dockerhub", url: ""]){
+          withDockerRegistry([credentialsId:"dockerhub"]){
             sh 'printenv'
             sh 'sudo usermod -aG docker $USER'
             sh ' sudo docker build -t adinagesh/numeric-app:""$GIT_COMMIT"" .'
