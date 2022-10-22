@@ -80,20 +80,20 @@ pipeline {
         }
 
          } */
-      stage {
+       stage {
         steps {
           sh 'exit 0'
         }
-      }
+       }
         
  
   } 
 
   post {
     always { 
-           // echo 'I will always say Hello again!'
-          //  junit 'target/surefire-reports/*.xml'
-          //  jacoco execPattern: 'target/jacoco.exec'
+         // echo 'I will always say Hello again!'
+         //  junit 'target/surefire-reports/*.xml'
+        //  jacoco execPattern: 'target/jacoco.exec'
             sendnotification currentBuild.result
         }
   }
