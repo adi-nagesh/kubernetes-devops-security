@@ -17,7 +17,7 @@ pipeline {
 
             }
           }
-     /*  stage('sonarqube-sa') {
+        /*  stage('sonarqube-sa') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                   sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric1 -Dsonar.host.url=http://devtyss.eastus.cloudapp.azure.com:9000"
@@ -30,7 +30,7 @@ pipeline {
             }  
             
       } */
-    /*   stage('Vulnerability Scan - Docker'){
+       /*   stage('Vulnerability Scan - Docker'){
         steps {
            parallel(
             "dependency scan":{
@@ -42,14 +42,14 @@ pipeline {
             }
           )
         }
-      }  */
-      /*  stage('sonar-qube scan'){
+        }  */
+        /*  stage('sonar-qube scan'){
          steps {
           sh  "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric -Dsonar.host.url=http://54.196.165.246:9000 -Dsonar.login=sqp_8b5387236d59bb9d5ab2d5d3f2a58741695960e1"
          }
-       } */
-     /*   stage('sonar-qube'){
-         steps {
+         } */
+       /*   stage('sonar-qube'){
+            steps {
            withSonarQubeEnv('SonarQube') {
                   sh  "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric -Dsonar.host.url=http://ec2-3-89-253-32.compute-1.amazonaws.com:9000 -Dsonar.login=sqp_8b5387236d59bb9d5ab2d5d3f2a58741695960e1"
            }
@@ -61,7 +61,7 @@ pipeline {
 
           }
         }
-       stage('Docker Build and push') {
+         stage('Docker Build and push') {
         steps {
           withDockerRegistry([credentialsId:"dockerhub", url: ""]){
             sh 'printenv'
@@ -71,7 +71,7 @@ pipeline {
           }
          }
         } 
-       stage('kubernetes Deployment - Dev'){
+         stage('kubernetes Deployment - Dev'){
         steps {
            withKubeConfig([credentialsId: 'kubeconfig']){
             sh "sed -i 's#replace#adinagesh/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
@@ -80,7 +80,7 @@ pipeline {
         }
 
          } */
-       stage {
+     stage {
         steps {
           sh 'exit 0'
         }
