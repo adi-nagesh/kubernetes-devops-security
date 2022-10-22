@@ -62,13 +62,6 @@ pipeline {
               }
 
           } 
-          stage {
-              steps {
-                sh 'exit 0'
-              }
-          }
-        
- 
   } 
 
   post {
