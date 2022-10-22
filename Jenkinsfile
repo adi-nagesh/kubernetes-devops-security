@@ -1,3 +1,6 @@
+@Library('slack') _
+
+
 pipeline {
   agent any
 
@@ -86,6 +89,7 @@ pipeline {
             echo 'I will always say Hello again!'
             junit 'target/surefire-reports/*.xml'
             jacoco execPattern: 'target/jacoco.exec'
+            sendnotification currentBuild.result
         }
   }
   //success {}
