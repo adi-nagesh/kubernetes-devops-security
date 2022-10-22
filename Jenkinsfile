@@ -68,6 +68,12 @@ pipeline {
               sh 'exit 0'
             }
           } 
+          stage ('promote to prod')
+            steps{
+               timeout(time: 2, unit: 'DAYS') {
+                  input 'do you want to approve build to production'
+               }
+          }
   } 
 
   post {
