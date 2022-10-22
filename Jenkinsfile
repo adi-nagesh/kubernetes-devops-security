@@ -61,6 +61,12 @@ pipeline {
                   }
               }
 
+          }
+          stage ('test'){
+            steps{
+              echo 'hi how are you'
+              sh 'exit 0'
+            }
           } 
   } 
 
