@@ -59,7 +59,7 @@ pipeline {
             sh ' docker push adinagesh/numeric-app:""$GIT_COMMIT""'
           }
         }
-      } 
+       } 
        stage('kubernetes Deployment - Dev'){
         steps {
            withKubeConfig([credentialsId: 'kubeconfig']){
