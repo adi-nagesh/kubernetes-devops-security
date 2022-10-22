@@ -62,11 +62,11 @@ pipeline {
           //     }
 
           // } 
-          stage {
+        stage {
               steps {
                 sh 'exit 0'
               }
-          }
+        }
         
  
   } 
