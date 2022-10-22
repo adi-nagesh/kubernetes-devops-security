@@ -45,6 +45,11 @@ pipeline {
           )
         }
       }  */
+       stage('sonar-qube scan'){
+         steps {
+          sh  "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric -Dsonar.host.url=http://54.196.165.246:9000 -Dsonar.login=sqp_8b5387236d59bb9d5ab2d5d3f2a58741695960e1"
+         }
+       }
        stage('Docker Build and push') {
         steps {
           withDockerRegistry([credentialsId:"dockerhub"]){
