@@ -11,12 +11,7 @@ pipeline {
          stage('unit tests - JUnit and Jacoco') {
             steps {
               sh "mvn test"
-            }
-            post {
-              always {
-                junit 'target/surefire-reports/*.xml'
-                jacoco execPattern: 'target/jacoco.exec'
-              }
+
             }
           }
      /*  stage('sonarqube-sa') {
@@ -81,6 +76,20 @@ pipeline {
            }
         }
 
-        }
+         }
+        
+ 
   } 
+
+  post {
+    always { 
+            echo 'I will always say Hello again!'
+            junit 'target/surefire-reports/*.xml'
+            jacoco execPattern: 'target/jacoco.exec'
+        }
+  }
+  //success {}
+  //failure {}
 }
+
+
