@@ -1,9 +1,8 @@
 #!/bin/bash 
 #cis-etcd.sh
 
-total_fail $(kube-bench run --targets ctcd   --check 2.2 --json | jq .Totals.total_fail
-)
-if [["$total_fail" -ne 0]];
+total_fail=$(kube-bench run --targets ctcd   --check 2.2 --json | jq .Totals.total_fail)
+if [[ "$total_fail" -ne 0 ]];
       then 
            echo "CIS benchmark failed etcd   while testing for 2.2"
            exit 1;
