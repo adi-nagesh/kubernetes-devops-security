@@ -33,7 +33,7 @@ pipeline {
           stage('sonar-qube'){
               steps {
                  withSonarQubeEnv('SonarQube') {
-                  sh  "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric -Dsonar.host.url=http://ec2-3-89-253-32.compute-1.amazonaws.com:9000 -Dsonar.login=sqp_8b5387236d59bb9d5ab2d5d3f2a58741695960e1"
+                  sh  "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric -Dsonar.host.url=http://ec2-52-90-156-55.compute-1.amazonaws.com:9000 -Dsonar.login=sqp_8b5387236d59bb9d5ab2d5d3f2a58741695960e1"
                  }
                  timeout(time: 3, unit: 'MINUTES') {
                    script {
