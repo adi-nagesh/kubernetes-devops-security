@@ -19,3 +19,16 @@
 ## sonarqube image 
 
 'docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest'
+
+## cis benchmarking
+
+https://www.cisecurity.org/benchmark/kubernetes
+
+
+download kube-bench
+
+
+https://github.com/aquasecurity/kube-bench
+
+
+curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.6.10/kube-bench_0.6.10_linux_amd64.deb -o kube-bench_0.6.10_linux_amd64.deb
