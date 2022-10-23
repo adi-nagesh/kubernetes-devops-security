@@ -86,6 +86,23 @@ pipeline {
               }
             }
           }
+          stage ('k8s prod deployment') {
+            steps {
+              parallel(
+                "Deployment": {
+                  withKubeConfig([credentialsId: 'kubeconfig']){
+                  sh "sed -i 's#replace#adinagesh/numeric-app:${GIT_COMMIT}#g' k8s_prod_deployment_service.yaml"
+                  sh "kubectl -n prod  apply -f k8s_prod_deployment_service.yaml" //newcode
+                  }
+                },
+                "Rollout Status": {
+                  withKubeConfig([credentialIld: 'kubeconfig']){
+                    sh "bash k8s-prod-deployment-rollout-status.sh"
+                   }
+                }
+              )
+            }
+          }
   } 
 
   post {
