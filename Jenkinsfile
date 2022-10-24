@@ -117,7 +117,7 @@ pipeline {
           jacoco execPattern: 'target/jacoco.exec'
           //sendnotification currentBuild.result
          }
-   }
+   
     success {
         script {
           env.failedStage = "none"
@@ -125,6 +125,7 @@ pipeline {
           sendnotification currentBuild.result
         }
     }
+  }
   //failure {}
 }
 
