@@ -73,3 +73,120 @@ kubectl -n prod expose deploy node-app --name node-service --port 5000
 kubectl get namespace --show-labels
 kubectl label na prod istio-injection=enabled
 kubectl -n prod rollout restart deploy node-app
+
+## mtls
+ # PeerAuthentication
+ cat > peerauth.yml <<EOF
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  mtls:
+    mode: STRICT
+
+EOF
+
+kubectl apply -f peerauth.yml
+
+ # Configuring ingress using an Istio gateway
+
+ cat > istio-gateway-vs.yaml <<EOF
+ ---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: devsecops-gateway
+  namespace: prod
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - '*'
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: devsecops-numeric
+  namespace: prod
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - devsecops-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /increment
+    - uri:
+        exact: /
+    route:
+    - destination:
+        port:
+          number: 8000
+        host: devsecops-svc
+
+EOF
+
+
+kubectl get vs,gateway -n prod
+
+kubectl get 
+
+ while true; do curl -s localhost:31130/increment/99;leep 1; done
+http://ec2-52-90-156-55.compute-1.amazonaws.com:31130/
+
+## monitoring 
+
+enable prometheus and grafana NOdePort
+
+## install falco
+curl -s https://falco.org/repo/falcosecurity-3672BA8F.asc | apt-key add -
+echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
+apt-get update -y
+apt-get -y install linux-headers-$(uname -r)
+apt-get install -y falco
+
+
+## install helm
+
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+## install falcosidekik
+
+kubectl create namespace falco
+helm repo add falcosecurity https://falcosecurity.github.io/charts
+helm install falco falcosecurity/falco \
+--set falcosidekick.enabled=true \
+--set falcosidekick.webui.enabled=true -n falco
+
+helm repo ls
+
+https://hooks.slack.com/services/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
+
+curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
+
+
+kubectl create namespace falco
+helm repo add falcosecurity https://falcosecurity.github.io/charts
+
+
+
+## kube-scan 
+
+kubectl apply -f https://raw.githubusercontent.com/sidd-harth/kubernetes-devops-security/main/kube-scan.yaml
+
+
+
+### custom slack app    
+
+
+create new app
+
+xoxb-4263304883700-4263781523138-aCIvB62YpsZ3zx3lmNzmjgdG
